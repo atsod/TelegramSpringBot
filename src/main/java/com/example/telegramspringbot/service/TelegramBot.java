@@ -1,7 +1,6 @@
 package com.example.telegramspringbot.service;
 
-import com.example.telegramspringbot.commands.StartCommand;
-import com.example.telegramspringbot.commands.TopFiveSitesCommand;
+import com.example.telegramspringbot.commands.*;
 import com.example.telegramspringbot.config.BotConfig;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -9,6 +8,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.io.IOException;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
@@ -51,6 +52,22 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/show_top_five_sites":
                     TopFiveSitesCommand.command(this, message);
                     break;
+                case "/show_top_five_games":
+                    try {
+                        TopFiveGamesCommand.command(this, message);
+                    } catch (IOException | TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+                case "/show_funny_pictures":
+                    break;
+                case "/about":
+                    try {
+                        AboutCommand.command(this, message);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         }
         //passing next stage from Main menu buttons
@@ -60,10 +77,28 @@ public class TelegramBot extends TelegramLongPollingBot {
                     TopFiveSitesCommand.command(this, message);
                     return;
                 case "Топ 5 игр \uD83D\uDD2B":
+                    try {
+                        TopFiveGamesCommand.command(this, message);
+                    } catch (IOException | TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
                     return;
                 case "Смешные картинки \uD83D\uDE02":
+                    try {
+                        FunnyPicturesCommand.command(this, message);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
                     return;
                 case "Дополнительно ☕️":
+                    try {
+                        AboutCommand.command(this, message);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return;
+                case "Вернуться":
+                    StartCommand.command(this, message);
                     return;
             }
 
