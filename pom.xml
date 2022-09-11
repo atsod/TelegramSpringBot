@@ -14,7 +14,7 @@
     <name>TelegramSpringBot</name>
     <description>TelegramSpringBot</description>
     <properties>
-        <java.version>18</java.version>
+        <java.version>14</java.version>
         <telegram.version>6.1.0</telegram.version>
         <lombok.version>1.18.24</lombok.version>
     </properties>

@@ -37,10 +37,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         if(update.hasCallbackQuery()) {
             String callDataString = update.getCallbackQuery().getData();
             Message callBackMQueryMessage = update.getCallbackQuery().getMessage();
-            switch (callDataString) {
-                case "Back to Main menu":
-                    StartCommand.command(this, callBackMQueryMessage);
-                    break;
+            if ("Back to Main menu".equals(callDataString)) {
+                StartCommand.command(this, callBackMQueryMessage);
             }
         }
         //passing next stage from commands
