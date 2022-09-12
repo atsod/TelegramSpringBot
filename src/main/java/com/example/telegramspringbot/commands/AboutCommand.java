@@ -1,6 +1,7 @@
 package com.example.telegramspringbot.commands;
 
 import com.example.telegramspringbot.service.TelegramBot;
+import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -11,7 +12,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.Collections;
 
 public class AboutCommand {
-    public static void command(TelegramBot bot, Message message) throws TelegramApiException {
+    @SneakyThrows
+    public static void command(TelegramBot bot, Message message) {
         String contactInfo = """
                 Бот был создан 11.09.2022 \s
                 Мой ВК: vk.com/a_tsod\s
@@ -25,6 +27,7 @@ public class AboutCommand {
                         new KeyboardRow(
                                 Collections.singletonList(
                                         new KeyboardButton("Вернуться")))));
+        keyboardMarkup.setResizeKeyboard(true);
 
         bot.execute(SendMessage.builder()
                 .chatId(message.getChatId())

@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
+
     private final BotConfig config;
 
     public TelegramBot(BotConfig config) {
@@ -41,6 +42,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 StartCommand.command(this, callBackMQueryMessage);
             }
         }
+
         //passing next stage from commands
         else if(message != null && message.hasEntities() && message.hasText()) {
             switch(message.getText()) {
@@ -58,16 +60,18 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                     break;
                 case "/show_funny_pictures":
-                    break;
-                case "/about":
                     try {
-                        AboutCommand.command(this, message);
+                        FunnyPicturesCommand.command(this, message);
                     } catch (TelegramApiException e) {
                         throw new RuntimeException(e);
                     }
                     break;
+                case "/about":
+                    AboutCommand.command(this, message);
+                    break;
             }
         }
+
         //passing next stage from Main menu buttons
         else if (message!= null && message.hasText()) {
             switch (message.getText()) {
@@ -89,11 +93,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                     return;
                 case "Дополнительно ☕️":
-                    try {
-                        AboutCommand.command(this, message);
-                    } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
-                    }
+                    AboutCommand.command(this, message);
                     return;
                 case "Вернуться":
                     StartCommand.command(this, message);

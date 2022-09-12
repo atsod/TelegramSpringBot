@@ -11,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,6 +39,8 @@ public class StartCommand {
         KeyboardRow firstRow = new KeyboardRow(Arrays.asList(new KeyboardButton(buttonNames.get(0)),new KeyboardButton(buttonNames.get(1))));
         KeyboardRow secondRow = new KeyboardRow(Arrays.asList(new KeyboardButton(buttonNames.get(2)),new KeyboardButton(buttonNames.get(3))));
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(Arrays.asList(firstRow, secondRow));
+        keyboardMarkup.setOneTimeKeyboard(true);
+        keyboardMarkup.setResizeKeyboard(true);
 
         bot.execute(SendMessage.builder()
                 .chatId(message.getChatId())

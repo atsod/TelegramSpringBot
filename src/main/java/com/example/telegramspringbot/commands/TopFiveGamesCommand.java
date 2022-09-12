@@ -2,6 +2,7 @@ package com.example.telegramspringbot.commands;
 
 import com.example.telegramspringbot.service.TelegramBot;
 import com.google.common.collect.ImmutableMap;
+import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;

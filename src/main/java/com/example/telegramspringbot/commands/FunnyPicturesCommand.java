@@ -1,6 +1,7 @@
 package com.example.telegramspringbot.commands;
 
 import com.example.telegramspringbot.service.TelegramBot;
+import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FunnyPicturesCommand {
+    @SneakyThrows
     public static void command(TelegramBot bot, Message message) throws TelegramApiException {
         InputFile firstFile = new InputFile(new File("C:\\MyFiles\\Programming\\JavaProjects\\TelegramSpringBot\\src\\main\\resources\\pictures\\img.png"), "img.png");
         InputFile secondFile = new InputFile(new File("C:\\MyFiles\\Programming\\JavaProjects\\TelegramSpringBot\\src\\main\\resources\\pictures\\img_1.png"), "img.png_1");
