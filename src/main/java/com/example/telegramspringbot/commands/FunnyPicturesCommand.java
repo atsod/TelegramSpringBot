@@ -14,10 +14,10 @@ import java.util.List;
 public class FunnyPicturesCommand {
     @SneakyThrows
     public static void command(TelegramBot bot, Message message) throws TelegramApiException {
-        InputFile firstFile = new InputFile(new File("C:\\MyFiles\\Programming\\JavaProjects\\TelegramSpringBot\\src\\main\\resources\\pictures\\img.png"), "img.png");
-        InputFile secondFile = new InputFile(new File("C:\\MyFiles\\Programming\\JavaProjects\\TelegramSpringBot\\src\\main\\resources\\pictures\\img_1.png"), "img.png_1");
-        InputFile thirdFile = new InputFile(new File("C:\\MyFiles\\Programming\\JavaProjects\\TelegramSpringBot\\src\\main\\resources\\pictures\\img_2.png"), "img.png_2");
-        InputFile fourthFile = new InputFile(new File("C:\\MyFiles\\Programming\\JavaProjects\\TelegramSpringBot\\src\\main\\resources\\pictures\\img_3.png"), "img.png_3");
+        InputFile firstFile = new InputFile(new File("src/main/resources/pictures/img.png"), "img.png");
+        InputFile secondFile = new InputFile(new File("src/main/resources/pictures/img_1.png"), "img_1.png");
+        InputFile thirdFile = new InputFile(new File("src/main/resources/pictures/img_2.png"), "img_2.png");
+        InputFile fourthFile = new InputFile(new File("src/main/resources/pictures/img_3.png"), "img_3.png");
         List<InputFile> photoList = Arrays.asList(firstFile, secondFile, thirdFile, fourthFile);
 
         for(int i = 0; i < 4; i++) {
