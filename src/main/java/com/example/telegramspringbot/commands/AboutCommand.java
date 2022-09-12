@@ -28,6 +28,7 @@ public class AboutCommand {
                                 Collections.singletonList(
                                         new KeyboardButton("Вернуться")))));
         keyboardMarkup.setResizeKeyboard(true);
+        keyboardMarkup.setOneTimeKeyboard(true);
 
         bot.execute(SendMessage.builder()
                 .chatId(message.getChatId())
