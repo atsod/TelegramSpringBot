@@ -42,7 +42,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                 StartCommand.command(this, callBackMQueryMessage);
             }
         }
-
         //passing next stage from commands
         else if(message != null && message.hasEntities() && message.hasText()) {
             switch(message.getText()) {
@@ -71,48 +70,51 @@ public class TelegramBot extends TelegramLongPollingBot {
                     break;
             }
         }
-
         //passing next stage from Main menu buttons
         else if (message!= null && message.hasText()) {
             switch (message.getText()) {
                 case "Топ 5 сайтов \uD83D\uDC8E":
                     TopFiveSitesCommand.command(this, message);
-                    return;
+                    break;
                 case "Топ 5 игр \uD83D\uDD2B":
                     try {
                         TopFiveGamesCommand.command(this, message);
                     } catch (IOException | TelegramApiException e) {
                         throw new RuntimeException(e);
                     }
-                    return;
+                    break;
                 case "Смешные картинки \uD83D\uDE02":
                     try {
                         FunnyPicturesCommand.command(this, message);
                     } catch (TelegramApiException e) {
                         throw new RuntimeException(e);
                     }
-                    return;
+                    break;
                 case "Дополнительно ☕️":
                     AboutCommand.command(this, message);
-                    return;
+                    break;
                 case "Вернуться":
                     StartCommand.command(this, message);
-                    return;
+                    break;
+                default:
+                    messageHandler(message);
             }
+        }
+    }
 
-            //Reversing text messages, if not commands
-            char[] letter = message.getText().toCharArray();
-            StringBuilder result = new StringBuilder();
-            int length = message.getText().length();
-            for(int i = 0; i < length; i++) result.append(letter[length - i - 1]);
-            try {
-                execute(SendMessage.builder()
-                        .chatId(message.getChatId())
-                        .text("Reverse message:\n" + result)
-                        .build());
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+    private void messageHandler(Message message) {
+        //Reversing text messages, if not commands
+        char[] letter = message.getText().toCharArray();
+        StringBuilder result = new StringBuilder();
+        int length = message.getText().length();
+        for(int i = 0; i < length; i++) result.append(letter[length - i - 1]);
+        try {
+            execute(SendMessage.builder()
+                    .chatId(message.getChatId())
+                    .text("Reverse message:\n" + result)
+                    .build());
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 }
