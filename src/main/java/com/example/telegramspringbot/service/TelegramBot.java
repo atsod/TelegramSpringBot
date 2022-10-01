@@ -2,6 +2,7 @@ package com.example.telegramspringbot.service;
 
 import com.example.telegramspringbot.commands.*;
 import com.example.telegramspringbot.config.BotConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -11,6 +12,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
@@ -55,14 +57,14 @@ public class TelegramBot extends TelegramLongPollingBot {
                     try {
                         TopFiveGamesCommand.command(this, message);
                     } catch (IOException | TelegramApiException e) {
-                        throw new RuntimeException(e);
+                        log.error("error occured: " + e.getMessage());
                     }
                     break;
                 case "/show_funny_pictures":
                     try {
                         FunnyPicturesCommand.command(this, message);
                     } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
+                        log.error("error occured: " + e.getMessage());
                     }
                     break;
                 case "/about":
